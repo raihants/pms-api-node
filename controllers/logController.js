@@ -1,8 +1,10 @@
 const Log = require('../models/Log');
 
 exports.getAllLogs = (req, res) => {
-  Log.getAll((err, data) => {
-    if (err) return res.status(500).json({ error: err.message });
+try {
+    const data = await Log.getAll();
     res.json(data);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
