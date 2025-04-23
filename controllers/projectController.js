@@ -3,8 +3,10 @@ const Project = require('../models/Project');
 exports.getAllProjects = (req, res) => {
     console.log('User from token', req.user);
 
-  Project.getAll((err, data) => {
-    if (err) return res.status(500).json({ error: err.message });
+  try {
+    const data = await Project.getAll();
     res.json(data);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
