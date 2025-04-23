@@ -9,6 +9,19 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+exports.getUsersById = async (req, res) => {
+  const { id } = req.params; // Ambil ID dari parameter URL
+  try {
+    const data = await User.getById(id); // Asumsikan ada method getById di model User
+    if (!data) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 require('dotenv').config();
@@ -36,7 +49,7 @@ exports.login = async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.status(200).json({token, user});
+    res.status(200).json({token});
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ error: 'Internal server error' });
