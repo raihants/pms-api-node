@@ -20,5 +20,6 @@ router.get('/reports', auth, report.getAllReports);
 router.get('/tasks', auth, task.getAllTasks);
 router.get('/teams', auth, team.getAllTeams);
 router.get('/users', auth, user.getAllUsers);
+router.get('/users/:id', user.getUsersById);
 
 module.exports = router;

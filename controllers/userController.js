@@ -26,6 +26,40 @@ const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 require('dotenv').config();
 
+exports.register = async (req, res) => {
+  const { username, password, nama_lengkap, role } = req.body;
+
+  // Validasi field kosong
+  if (!username || !password || !nama_lengkap || !role) {
+    return res.status(400).json({ error: 'Semua field harus diisi' });
+  }
+
+  try {
+    // Cek jika username sudah digunakan
+    const existingUser = await User.findByUsername(username);
+    if (existingUser) {
+      return res.status(409).json({ error: 'Username sudah digunakan' });
+    }
+
+    // Buat user baru
+    const userId = await User.create({ username, password, nama_lengkap, role });
+
+    res.status(201).json({
+      message: 'Registrasi berhasil',
+      user: {
+        id: userId,
+        username,
+        nama_lengkap,
+        role
+      }
+    });
+  } catch (err) {
+    console.error('Register error:', err.message);
+    res.status(500).json({ error: 'Gagal mendaftar, terjadi kesalahan server' });
+  }
+};
+
+
 exports.login = async (req, res) => {
   console.log('Login route hit');
   console.log('Request body:', req.body);
@@ -49,7 +83,7 @@ exports.login = async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.status(200).json({token});
+    res.status(200).json({token, user});
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ error: 'Internal server error' });
