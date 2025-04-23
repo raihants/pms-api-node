@@ -13,6 +13,8 @@ require('dotenv').config();
 
 exports.login = (req, res) => {
   console.log('Login route hit');
+  console.log('Request body:', req.body);
+
   const { username, password } = req.body;
 
   db.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, results) => {
