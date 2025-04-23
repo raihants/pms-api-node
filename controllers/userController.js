@@ -41,6 +41,8 @@ exports.register = async (req, res) => {
       return res.status(409).json({ error: 'Username sudah digunakan' });
     }
 
+    console.log("register"+req.body)
+
     // Buat user baru
     const userId = await User.create({ username, password, nama_lengkap, role });
 
