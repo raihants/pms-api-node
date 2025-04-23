@@ -1,6 +1,6 @@
 const Log = require('../models/Log');
 
-exports.getAllLogs = (req, res) => {
+exports.getAllLogs = async (req, res) => {
 try {
     const data = await Log.getAll();
     res.json(data);
