@@ -1,7 +1,10 @@
 const db = require('../config/db');
 
 const Task = {
-  getAll: (cb) => db.query('SELECT * FROM tasks', cb),
+  getAll: async () => {
+    const [rows] = await db.query('SELECT * FROM tasks');
+    return rows;
+  },
 };
 
 module.exports = Task;

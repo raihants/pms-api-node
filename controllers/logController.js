@@ -1,7 +1,7 @@
 const Log = require('../models/Log');
 
 exports.getAllLogs = async (req, res) => {
-try {
+  try {
     const data = await Log.getAll();
     res.json(data);
   } catch (err) {

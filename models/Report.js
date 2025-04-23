@@ -1,7 +1,10 @@
 const db = require('../config/db');
 
 const Report = {
-  getAll: (cb) => db.query('SELECT * FROM reports', cb),
+  getAll: async () => {
+    const [rows] = await db.query('SELECT * FROM reports');
+    return rows;
+  },
 };
 
 module.exports = Report;

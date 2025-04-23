@@ -1,8 +1,10 @@
 const Team = require('../models/Team');
 
-exports.getAllTeams = (req, res) => {
-  Team.getAll((err, data) => {
-    if (err) return res.status(500).json({ error: err.message });
+exports.getAllTeams = async (req, res) => {
+  try {
+    const data = await Team.getAll();
     res.json(data);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };

@@ -1,8 +1,10 @@
 const Task = require('../models/Task');
 
-exports.getAllTasks = (req, res) => {
-  Task.getAll((err, data) => {
-    if (err) return res.status(500).json({ error: err.message });
+exports.getAllTasks = async (req, res) => {
+  try {
+    const data = await Task.getAll();
     res.json(data);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };

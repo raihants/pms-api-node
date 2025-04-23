@@ -1,10 +1,12 @@
 const User = require('../models/User');
 
-exports.getAllUsers = (req, res) => {
-  User.getAll((err, data) => {
-    if (err) return res.status(500).json({ error: err.message });
+exports.getAllUsers = async (req, res) => {
+  try {
+    const data = await User.getAll();
     res.json(data);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 const jwt = require('jsonwebtoken');
