@@ -21,6 +21,6 @@ router.get('/tasks', auth, task.getAllTasks);
 router.get('/teams', auth, team.getAllTeams);
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', user.getUsersById);
-router.get('/register', user.register);
+router.post('/register', user.register);
 
 module.exports = router;
