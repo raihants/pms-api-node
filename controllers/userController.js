@@ -41,10 +41,10 @@ exports.register = async (req, res) => {
       return res.status(409).json({ error: 'Username sudah digunakan' });
     }
 
-    console.log("register"+req.body)
+    console.log("register"+username+ password+ nama_lengkap+ role)
 
     // Buat user baru
-    const userId = await User.create({ username, password, nama_lengkap, role });
+    const userId = await User.create({ username, password, nama_lengkap, role });    
 
     res.status(201).json({
       message: 'Registrasi berhasil',
