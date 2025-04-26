@@ -41,7 +41,7 @@ exports.register = async (req, res) => {
       return res.status(409).json({ error: 'Username sudah digunakan' });
     }
 
-    console.log("register"+username+ password+ nama_lengkap+ role)
+    console.log("register", username, password, nama_lengkap, role);
 
     // Buat user baru
     const userId = await User.create({ username, password, nama_lengkap, role });    
@@ -85,7 +85,7 @@ exports.login = async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.status(200).json({token, user});
+    res.status(200).json({ token, user: userWithoutPassword });
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ error: 'Internal server error' });
