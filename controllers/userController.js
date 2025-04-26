@@ -84,8 +84,14 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );
+    const userWithoutPassword = {
+      id: user.id,
+      username: user.username,
+      nama_lengkap: user.nama_lengkap,
+      role: user.role
+    };
 
-    res.status(200).json({ token, user });
+    res.status(200).json({ token, user: userWithoutPassword });
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ error: 'Internal server error' });
