@@ -13,7 +13,7 @@ const User = {
 
   create: async ({ username, password, nama_lengkap, role }) => {
     const [result] = await db.query(
-      'INSERT INTO users (username, password, nama_lengkap, role) VALUES (?, ?, ?, ?)',
+      'INSERT INTO users (username, password, name, role) VALUES (?, ?, ?, ?)',
       [username, password, nama_lengkap, role]
     );
     return result.insertId;
