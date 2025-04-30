@@ -16,6 +16,7 @@ router.post('/login', user.login);
 // Protected routes
 router.get('/logs', auth, log.getAllLogs);
 router.get('/projects', auth, project.getAllProjects);
+router.post('/projects', auth, project.createProject);
 router.get('/reports', auth, report.getAllReports);
 router.get('/tasks', auth, task.getAllTasks);
 router.get('/teams', auth, team.getAllTeams);
