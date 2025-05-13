@@ -12,6 +12,7 @@ const auth = require('../middleware/authMiddleware'); // <- auth middleware
 
 // Public route
 router.post('/login', user.login);
+router.post('/register', user.register);
 
 // Protected routes
 router.get('/logs', auth, log.getAllLogs);
@@ -22,6 +23,8 @@ router.get('/tasks', auth, task.getAllTasks);
 router.get('/teams', auth, team.getAllTeams);
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', auth, user.getUsersById);
-router.post('/register', user.register);
+router.put('/projects/:id', auth, project.updateProject);
+router.delete('/projects/:id', auth, project.deleteProject);
+router.get('/projects/:id', auth, project.getProjectById);
 
 module.exports = router;
