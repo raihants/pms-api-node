@@ -20,6 +20,7 @@ router.get('/projects', auth, project.getAllProjects);
 router.post('/projects', auth, project.createProject);
 router.get('/reports', auth, report.getAllReports);
 router.get('/tasks', auth, task.getAllTasks);
+router.get('/tasks/:id', auth, task.getByIdProjects);
 router.get('/teams', auth, team.getAllTeams);
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', auth, user.getUsersById);
