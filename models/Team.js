@@ -8,7 +8,7 @@ const Team = {
 
   getUsersByProjectID: async (projectId) => {
   const [rows] = await db.query(`
-    SELECT u.id, u.nama
+    SELECT u.id, u.name
     FROM users u
     JOIN teams t ON u.team_id = t.id
     WHERE t.project_id = ?
