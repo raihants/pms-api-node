@@ -22,10 +22,12 @@ router.get('/reports', auth, report.getAllReports);
 router.get('/tasks', auth, task.getAllTasks);
 router.get('/tasks/:id', auth, task.getByIdProjects);
 router.get('/teams', auth, team.getAllTeams);
+router.get('/teams/:id', auth, team.getUsersByIDProject);
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', auth, user.getUsersById);
 router.put('/projects/:id', auth, project.updateProject);
 router.delete('/projects/:id', auth, project.deleteProject);
 router.get('/projects/:id', auth, project.getProjectById);
+
 
 module.exports = router;
