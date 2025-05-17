@@ -7,7 +7,7 @@ const Task = {
   },
 
   getById: async (id) => {
-      const [rows] = await db.query('SELECT t.project_id, t.name, t.description, t.priority, t.start_date, t.end_date, t.status, u.name as user_name FROM tasks t join users u on t.user_id = u.id where project_id = ?', [id]);
+      const [rows] = await db.query('SELECT t.project_id, t.id, t.name, t.description, t.priority, t.start_date, t.end_date, t.status, u.name as user_name FROM tasks t join users u on t.user_id = u.id where project_id = ?', [id]);
       return rows;
   },
 
@@ -24,9 +24,9 @@ const Task = {
     } = taskData;
 
     const [result] = await db.query(
-      `INSERT INTO tasks (project_id, name, description, start_date, end_date, status, user_id)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [project_id, name, description, start_date, end_date, status, user_id]
+      `INSERT INTO tasks (project_id, name, description, priority, start_date, end_date, status, user_id)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [project_id, name, description, priority, start_date, end_date, status, user_id]
     );
 
     return { id: result.insertId, ...taskData };
