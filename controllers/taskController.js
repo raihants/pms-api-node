@@ -87,8 +87,9 @@ exports.updateTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
 
-  exports.deleteTask = async (req, res) => {
+exports.deleteTask = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -102,5 +103,4 @@ exports.updateTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
 };
