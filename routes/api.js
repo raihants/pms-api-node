@@ -29,9 +29,11 @@ router.get('/tasks', auth, task.getAllTasks);
 router.get('/tasks/:id', auth, task.getByIdProjects);
 router.post('/tasks', auth, task.createTask);
 router.put('/tasks/:id', auth, task.updateTask);
+router.delete('/tasks/:id', auth, task.deleteTask);
 
 router.get('/teams', auth, team.getAllTeams);
 router.get('/teams/:id', auth, team.getUsersByIDProject);
+
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', auth, user.getUsersById);
 
