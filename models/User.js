@@ -31,7 +31,7 @@ const User = {
     JOIN teams t ON u.team_id = t.id
     WHERE t.project_id = ?`, [projectId]);
   return rows;
-  }
+  },
 };
 
 module.exports = User;
