@@ -98,7 +98,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.getUsersByProjectID = async (req,res) => {
+exports.getUsersProjectID = async (req,res) => {
   const{id} = req.params;
   try {
     const data = await User.getUsersByProjectID(id);
