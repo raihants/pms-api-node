@@ -9,6 +9,7 @@ const team = require('../controllers/teamController');
 const user = require('../controllers/userController');
 
 const auth = require('../middleware/authMiddleware'); // <- auth middleware
+const User = require('../models/User');
 
 // Public route
 router.post('/login', user.login);
@@ -34,6 +35,7 @@ router.delete('/tasks/:id', auth, task.deleteTask);
 
 router.get('/teams', auth, team.getAllTeams);
 router.get('/teams/:id', auth, team.getUsersByIDProject);
+router.get('/teams-users/:id', auth, User.getUsersByIDProject);
 
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', auth, user.getUsersById);
