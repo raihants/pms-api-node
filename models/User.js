@@ -26,7 +26,7 @@ const User = {
 
   getUsersByProjectID: async (projectId) => {
   const [rows] = await db.query(`
-    SELECT u.id as user_id, u.name as user_name, t*
+    SELECT u.id as user_id, u.name as user_name, t.*
     FROM users u
     JOIN teams t ON u.team_id = t.id
     WHERE t.project_id = ?`, [projectId]);
