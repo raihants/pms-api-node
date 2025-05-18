@@ -22,6 +22,15 @@ const User = {
   findByUsername: async (username) => {
     const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
     return rows[0];
+  },
+
+  getUsersByProjectID: async (projectId) => {
+  const [rows] = await db.query(`
+    SELECT u.id as user_id, u.name as user_name, t*
+    FROM users u
+    JOIN teams t ON u.team_id = t.id
+    WHERE t.project_id = ?`, [projectId]);
+  return rows;
   }
 };
 

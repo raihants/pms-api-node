@@ -97,3 +97,13 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+exports.getUsersByProjectID = async (req,res) => {
+  const{id} = req.params;
+  try {
+    const data = await User.getUsersByProjectID(id);
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
