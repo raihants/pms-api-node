@@ -16,6 +16,7 @@ router.post('/register', user.register);
 
 // Protected routes
 router.get('/logs', auth, log.getAllLogs);
+router.get('/logs/:id', auth, log.getByProjectId);
 
 router.get('/projects', auth, project.getAllProjects);
 router.post('/projects', auth, project.createProject);

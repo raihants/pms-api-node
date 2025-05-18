@@ -32,8 +32,8 @@ exports.createTask = async (req, res) => {
       user_id } = req.body;
 
   // Validasi sederhana
-  if (!project_id || !name || !start_date || !end_date || !status || !user_id) {
-    return res.status(400).json({ error: 'User, Name, start_date, end_date, and status are required' });
+  if (!project_id || !name || !start_date || !status || !user_id) {
+    return res.status(400).json({ error: 'User, Name, start_date, and status are required' });
   }
 
   try {

@@ -1,5 +1,7 @@
 const db = require('../config/db');
 
+const Log = require('./Log');
+
 const Task = {
   getAll: async () => {
     const [rows] = await db.query('SELECT * FROM tasks');
@@ -28,6 +30,12 @@ const Task = {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [project_id, name, description, priority, start_date, end_date, status, user_id]
     );
+
+    await Log.create({
+      task_id: result.insertId,
+      user_id: user_id,
+      activity: `Menambahkan tugas '${name}'`
+    });
 
     return { id: result.insertId, ...taskData };
   },
@@ -58,14 +66,28 @@ const Task = {
     [project_id, name, description, priority, start_date, end_date, status, user_id, id]
   );
 
+  await Log.create({
+      task_id: result.insertId,
+      user_id: user_id,
+      activity: `Mengubah tugas '${name}'`
+    });
+
   return { affectedRows: result.affectedRows, id, ...taskData };
 },
 
 delete: async (id) => {
+  const [tasks] = await db.query('SELECT name, user_id FROM tasks WHERE id = ?', [id]);
+    if (tasks.length > 0) {
+      const { name, user_id } = tasks[0];
+      await Log.create({
+        id_tugas: id,
+        id_pengguna: user_id,
+        deskripsi_aktivitas: `Menghapus tugas '${name}'`
+      });
+    }
     await db.query('DELETE FROM tasks WHERE id = ?', [id]);
     return { message: 'Tasks deleted successfully' };
   }
-
 };
 
 module.exports = Task;
