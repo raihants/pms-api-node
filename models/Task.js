@@ -80,9 +80,9 @@ delete: async (id) => {
     if (tasks.length > 0) {
       const { name, user_id } = tasks[0];
       await Log.create({
-        id_tugas: id,
-        id_pengguna: user_id,
-        deskripsi_aktivitas: `Menghapus tugas '${name}'`
+        task_id: id,
+        user_id: user_id,
+        activity: `Menghapus tugas '${name}'`
       });
     }
     await db.query('DELETE FROM tasks WHERE id = ?', [id]);
