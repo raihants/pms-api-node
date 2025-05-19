@@ -108,9 +108,10 @@ exports.getUsersProjectID = async (req,res) => {
   }
 };
 
-exports.updateUser = async (req,res) => {
-  const{id} = req.params;
-  
+exports.updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { username, password, name, role, team_id } = req.body; // <--- ini yang penting
+
   try {
     const existing = await User.getById(id);
     if (!existing) {
@@ -118,11 +119,16 @@ exports.updateUser = async (req,res) => {
     }
 
     const result = await User.updateUser(id, {
-      username, password, nama_lengkap, role, team_id
+      username,
+      password,
+      name,
+      role,
+      team_id
     });
 
-    res.status(200).json({ message: 'User updated successfully', result : result });
+    res.status(200).json({ message: 'User updated successfully', result });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
+
