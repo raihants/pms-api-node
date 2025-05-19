@@ -9,7 +9,6 @@ const team = require('../controllers/teamController');
 const user = require('../controllers/userController');
 
 const auth = require('../middleware/authMiddleware'); // <- auth middleware
-const User = require('../models/User');
 
 // Public route
 router.post('/login', user.login);
