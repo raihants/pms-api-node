@@ -3,7 +3,7 @@ const Team = require('../models/Team');
 exports.getAllTeams = async (req, res) => {
   const{id} = req.params
   try {
-    const data = await Team.getAll();
+    const data = await Team.getAll(id);
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
