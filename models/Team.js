@@ -1,8 +1,8 @@
 const db = require('../config/db');
 
 const Team = {
-  getAll: async () => {
-    const [rows] = await db.query('SELECT * FROM teams');
+  getAll: async (projectID) => {
+    const [rows] = await db.query('SELECT * FROM teams where project_id = ?',[projectID]);
     return rows;
   },
 

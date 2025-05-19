@@ -1,6 +1,7 @@
 const Team = require('../models/Team');
 
 exports.getAllTeams = async (req, res) => {
+  const{id} = req.params
   try {
     const data = await Team.getAll();
     res.json(data);
