@@ -32,6 +32,18 @@ const User = {
     WHERE t.project_id = ?`, [projectId]);
   return rows;
   },
+
+  updateUser: async (id, user) => {
+  const { username, password, nama_lengkap, role, team_id } = user;
+
+  const [result] = await db.query(
+    'UPDATE users SET username = ?, password = ?, name = ?, role = ?, team_id = ? WHERE id = ?',
+    [username, password, nama_lengkap, role, team_id, id]
+  );
+
+  return result.affectedRows > 0;
+  }
+
 };
 
 module.exports = User;

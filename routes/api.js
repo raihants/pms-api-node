@@ -37,7 +37,6 @@ router.get('/teams-users/:id', auth, user.getUsersProjectID);
 
 router.get('/users', auth, user.getAllUsers);
 router.get('/users/:id', auth, user.getUsersById);
-
-
+router.put('/users/:id', auth, user.updateUser);
 
 module.exports = router;
