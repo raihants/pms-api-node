@@ -117,7 +117,7 @@ exports.updateUser = async (req,res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const result = await User.update(id, {
+    const result = await User.updateUser(id, {
       username, password, nama_lengkap, role, team_id
     });
 
