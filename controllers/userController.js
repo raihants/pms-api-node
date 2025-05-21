@@ -27,10 +27,10 @@ const db = require('../config/db');
 require('dotenv').config();
 
 exports.register = async (req, res) => {
-  const { username, password, email, nama_lengkap, role } = req.body;
+  const { username, password, email, name, role } = req.body;
 
   // Validasi field kosong
-  if (!username || !password || !nama_lengkap || !role) {
+  if (!username || !password || !name || !role) {
     return res.status(400).json({ error: 'Semua field harus diisi' });
   }
 
@@ -41,10 +41,10 @@ exports.register = async (req, res) => {
       return res.status(409).json({ error: 'Username sudah digunakan' });
     }
 
-    console.log("register", username, password, nama_lengkap, role);
+    console.log("register", username, password, name, role);
 
     // Buat user baru
-    const userId = await User.create({ username, password, email, nama_lengkap, role });    
+    const userId = await User.create({ username, password, email, name, role });    
 
     res.status(201).json({
       message: 'Registrasi berhasil',
@@ -52,7 +52,7 @@ exports.register = async (req, res) => {
         id: userId,
         username,
         email,
-        nama_lengkap,
+        name,
         role
       }
     });

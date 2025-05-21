@@ -23,12 +23,14 @@ const Team = {
       project_id 
     } = teamData;
 
-    const [result] = await db.query(
+    if(teamData != null){
+      const [result] = await db.query(
       'INSERT INTO teams (name,description,project_id) VALUES (?,?,?)',
       [name,description,project_id]
     );
 
     return { id: result.insertId, ...teamData };
+    }
   }
 }
 
