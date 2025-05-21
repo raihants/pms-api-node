@@ -67,10 +67,10 @@ const Task = {
   );
 
   await Log.create({
-      task_id: result.insertId,
-      user_id: user_id,
-      activity: `Mengubah tugas '${name}'`
-    });
+    task_id: id, // 👈 perbaikan di sini
+    user_id: user_id,
+    activity: `Mengubah tugas '${name}'`
+  });
 
   return { affectedRows: result.affectedRows, id, ...taskData };
 },
