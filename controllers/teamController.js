@@ -25,7 +25,7 @@ exports.create = async (req, res) => {
   const {name, description, projectID} = req.body;
 
   try {
-    const data = await Team.create(name, description, projectID);
+    const data = await Team.create({name, description, projectID});
     res.status(201).json({ message: 'Team created successfully', team: data });
   } catch (err) {
     res.status(500).json({ error: err.message });
