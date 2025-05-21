@@ -20,12 +20,12 @@ const Team = {
     const {
       name,
       description,
-      projectID      
+      project_id 
     } = teamData;
 
     const [result] = await db.query(
       'INSERT INTO teams (name,description,project_id) VALUES (?,?,?)',
-      [name,description,projectID]
+      [name,description,project_id]
     );
 
     return { id: result.insertId, ...teamData };
