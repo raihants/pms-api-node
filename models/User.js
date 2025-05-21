@@ -11,10 +11,10 @@ const User = {
     return rows[0]; // Ambil hanya satu user
   },
 
-  create: async ({ username, password, nama_lengkap, role }) => {
+  create: async ({ username, password, email, nama_lengkap, role }) => {
     const [result] = await db.query(
-      'INSERT INTO users (username, password, name, role) VALUES (?, ?, ?, ?)',
-      [username, password, nama_lengkap, role]
+      'INSERT INTO users (username, password, email, name, role) VALUES (?, ?, ?, ?, ?)',
+      [username, password, email, nama_lengkap, role]
     );
     return result.insertId;
   },

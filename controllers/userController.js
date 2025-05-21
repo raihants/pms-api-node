@@ -27,7 +27,7 @@ const db = require('../config/db');
 require('dotenv').config();
 
 exports.register = async (req, res) => {
-  const { username, password, nama_lengkap, role } = req.body;
+  const { username, password, email, nama_lengkap, role } = req.body;
 
   // Validasi field kosong
   if (!username || !password || !nama_lengkap || !role) {
@@ -44,13 +44,14 @@ exports.register = async (req, res) => {
     console.log("register", username, password, nama_lengkap, role);
 
     // Buat user baru
-    const userId = await User.create({ username, password, nama_lengkap, role });    
+    const userId = await User.create({ username, password, email, nama_lengkap, role });    
 
     res.status(201).json({
       message: 'Registrasi berhasil',
       user: {
         id: userId,
         username,
+        email,
         nama_lengkap,
         role
       }
@@ -66,12 +67,12 @@ exports.login = async (req, res) => {
   console.log('Login route hit');
   console.log('Request body:', req.body);
 
-  const { username, password } = req.body;
+  const { identifier, password } = req.body; // 'identifier' bisa berupa username atau email
 
   try {
     const [results] = await db.query(
-      'SELECT * FROM users WHERE username = ? AND password = ?',
-      [username, password]
+      `SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?`,
+      [identifier, identifier, password]
     );
 
     if (results.length === 0) {
@@ -84,9 +85,11 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );
+
     const userWithoutPassword = {
       id: user.id,
       username: user.username,
+      email: user.email,
       nama_lengkap: user.nama_lengkap,
       role: user.role
     };
