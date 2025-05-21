@@ -113,7 +113,7 @@ exports.getUsersProjectID = async (req,res) => {
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { username, password, name, role, team_id } = req.body; // <--- ini yang penting
+  const { username, password, email, name, role, team_id } = req.body; // <--- ini yang penting
 
   try {
     const existing = await User.getById(id);
@@ -124,6 +124,7 @@ exports.updateUser = async (req, res) => {
     const result = await User.updateUser(id, {
       username,
       password,
+      email,
       name,
       role,
       team_id
