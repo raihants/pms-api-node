@@ -15,6 +15,7 @@ const Task = {
 
   create: async (taskData) => {
     const {
+      sus_id,
       project_id,
       name,
       description,
@@ -33,7 +34,7 @@ const Task = {
 
     await Log.create({
       task_id: result.insertId,
-      user_id: user_id,
+      user_id: sus_id,
       activity: `Menambahkan tugas '${name}'`
     });
 
@@ -42,6 +43,7 @@ const Task = {
 
   update: async (id, taskData) => {
   const {
+    sus_id,
     project_id,
     name,
     description,
@@ -68,7 +70,7 @@ const Task = {
 
   await Log.create({
     task_id: id, // 👈 perbaikan di sini
-    user_id: user_id,
+    user_id: sus_id,
     activity: `Mengubah tugas '${name}'`
   });
 

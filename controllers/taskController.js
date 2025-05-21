@@ -22,6 +22,7 @@ exports.getByIdProjects = async (req, res) => {
 
 exports.createTask = async (req, res) => {
   const { 
+      sus_id,
       project_id,
       name,
       description,
@@ -38,6 +39,7 @@ exports.createTask = async (req, res) => {
 
   try {
     const newTask = await Task.create({
+      sus_id,
       project_id,
       name,
       description,
@@ -57,6 +59,7 @@ exports.createTask = async (req, res) => {
 exports.updateTask = async (req, res) => {
   const{ id } = req.params;
   const { 
+      sus_id,
       project_id,
       name,
       description,
@@ -73,6 +76,7 @@ exports.updateTask = async (req, res) => {
     }
 
     const updatedTask = await Task.update(id,{
+      sus_id,
       project_id,
       name,
       description,
