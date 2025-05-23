@@ -6,6 +6,11 @@ const Project = {
     return rows;
   },
 
+  getAllByUserId: async (user_id) => {
+    const [rows] = await db.query('SELECT * FROM projects_users where user_id = ?', user_id);
+    return rows[0];
+  },
+
   getById: async (id) => {
     const [rows] = await db.query('SELECT * FROM projects WHERE id = ?', [id]);
     return rows[0]; // Ambil satu hasil karena ID unik

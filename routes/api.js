@@ -19,6 +19,7 @@ router.get('/logs', auth, log.getAllLogs);
 router.get('/logs/:id', auth, log.getByProjectId);
 
 router.get('/projects', auth, project.getAllProjects);
+router.get('/projects-users', auth, project.getAllProjectsByUsersId);
 router.post('/projects', auth, project.createProject);
 router.put('/projects/:id', auth, project.updateProject);
 router.delete('/projects/:id', auth, project.deleteProject);
