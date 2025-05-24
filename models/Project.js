@@ -7,7 +7,7 @@ const Project = {
   },
 
   getAllByUserId: async (user_id) => {
-    const [rows] = await db.query('SELECT * FROM projects_users where user_id = ?', user_id);
+    const [rows] = await db.query('SELECT project_id, project_name,description,status,start_date,end_date,budget FROM projects_users where user_id = ?', user_id);
     return rows[0];
   },
 
