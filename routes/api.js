@@ -25,7 +25,8 @@ router.put('/projects/:id', auth, project.updateProject);
 router.delete('/projects/:id', auth, project.deleteProject);
 router.get('/projects/:id', auth, project.getProjectById);
 
-router.get('/reports', auth, report.getAllReports);
+router.get('/reports/:id', auth, report.getByProject);
+router.post('/reports/:id', auth, report.generateForProject);
 
 router.get('/tasks', auth, task.getAllTasks);
 router.get('/tasks/:id', auth, task.getByIdProjects);

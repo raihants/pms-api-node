@@ -2,6 +2,8 @@ const db = require('../config/db');
 
 const Log = require('./Log');
 
+const ProjectReport = require('./Report');
+
 const Task = {
   getAll: async () => {
     const [rows] = await db.query('SELECT * FROM tasks');
@@ -38,6 +40,8 @@ const Task = {
       activity: `Menambahkan tugas '${name}'`
     });
 
+    await ProjectReport.generateForProject(project_id);
+
     return { id: result.insertId, ...taskData };
   },
 
@@ -73,6 +77,8 @@ const Task = {
     user_id: sus_id,
     activity: `Mengubah tugas '${name}'`
   });
+
+  await ProjectReport.generateForProject(project_id);
 
   return { affectedRows: result.affectedRows, id, ...taskData };
 },
