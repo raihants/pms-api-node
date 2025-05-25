@@ -9,7 +9,7 @@ const Task = {
   },
 
   getById: async (id) => {
-      const [rows] = await db.query('SELECT t.project_id, t.id, t.name, t.description, t.priority, t.start_date, t.end_date, t.status, u.name as user_name FROM tasks t join users u on t.user_id = u.id where project_id = ?', [id]);
+      const [rows] = await db.query('SELECT t.project_id, t.id, t.name, t.description, t.priority, t.start_date, t.end_date, t.status,t.user_id, u.name as user_name FROM tasks t join users u on t.user_id = u.id where project_id = ?', [id]);
       return rows;
   },
 
